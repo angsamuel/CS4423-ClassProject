@@ -10,6 +10,6 @@ public class MainMenuHandler : MonoBehaviour
     }
 
     public void Quit(){
-        Application.Quit();
+        Application.Quit(); //this does not work in the editor
     }
 }

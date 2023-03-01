@@ -41,11 +41,17 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: RainSplash
+    uniqueID: 3784837023
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
   - name: Effects
     uniqueID: 1591838911
+    locked: 0
+  - name: Fall
+    uniqueID: 2006385505
     locked: 0
   - name: UI
     uniqueID: 849793975

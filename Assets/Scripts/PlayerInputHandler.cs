@@ -8,6 +8,6 @@ public class PlayerInputHandler : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        creature.Move(new Vector3(Input.GetAxisRaw("Horizontal"),0) * Time.fixedDeltaTime);
+        creature.Move(new Vector3(Input.GetAxisRaw("Horizontal"),Input.GetAxisRaw("Vertical"),0));
     }
 }

@@ -19,18 +19,25 @@ public class Creature : MonoBehaviour
 
     public void Move(Vector3 offset){
         if(offset != Vector3.zero){
-            rb.MovePosition(transform.position + ((offset)*speed) );
+            offset.Normalize();
+            offset *= Time.fixedDeltaTime;
+            rb.MovePosition(transform.position + ((offset)*speed));
             asc.ChangeAnimationState("Walking");
-
             if(offset.x < 0){
                 spriteRenderer.flipX = true;
             }else{
                 spriteRenderer.flipX = false;
             }
-
-
         }else{
            asc.ChangeAnimationState("Idle"); 
         }
+    }
+
+    public void Stop(){
+        Move(Vector3.zero);
+    }
+
+    public void MoveToward(Vector3 position){
+        Move(position - transform.position);
     }
 }

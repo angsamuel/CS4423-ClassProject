@@ -9,8 +9,9 @@ public class Creature : MonoBehaviour
     public float speed = 2.5f;
     public AnimationStateChanger asc;
 
+    public bool platformingCreature = false; //when true, change behavior to work like 2D platformer char
 
-
+    public float jumpVel = 5;
     void Start(){
         spriteRenderer = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
@@ -20,8 +21,16 @@ public class Creature : MonoBehaviour
     public void Move(Vector3 offset){
         if(offset != Vector3.zero){
             offset.Normalize();
-            offset *= Time.fixedDeltaTime;
-            rb.MovePosition(transform.position + ((offset)*speed));
+            //offset *= Time.fixedDeltaTime;
+            //rb.MovePosition(transform.position + ((offset)*speed));
+            Vector3 vel = offset *= speed;
+            if(platformingCreature){
+                rb.velocity = new Vector2(vel.x,rb.velocity.y);
+            }else{
+                rb.velocity = vel;
+            }
+            
+            
             asc.ChangeAnimationState("Walking");
             if(offset.x < 0){
                 spriteRenderer.flipX = true;
@@ -29,15 +38,32 @@ public class Creature : MonoBehaviour
                 spriteRenderer.flipX = false;
             }
         }else{
-           asc.ChangeAnimationState("Idle"); 
+            Stop();
+        //asc.ChangeAnimationState("Idle"); 
         }
     }
 
     public void Stop(){
-        Move(Vector3.zero);
+        //return;
+        if(platformingCreature){
+            rb.velocity = new Vector2(0,rb.velocity.y);
+        }else{
+            rb.velocity = Vector3.zero;
+        }
+        asc.ChangeAnimationState("Idle");
+        
+        
     }
 
     public void MoveToward(Vector3 position){
         Move(position - transform.position);
+    }
+
+    public void Jump(){
+        if(!platformingCreature){
+            return;
+        }
+        rb.velocity = new Vector2(rb.velocity.x,jumpVel);
+
     }
 }

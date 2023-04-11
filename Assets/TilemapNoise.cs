@@ -26,7 +26,7 @@ public class TilemapNoise : MonoBehaviour
                 
                 float perlinValue = Mathf.PerlinNoise((float)x*noiseScale,(float)y*noiseScale); //keep coordinates between 0 and 1
                 
-                if(perlinValue > .5f){
+                if(perlinValue > .75f){
                     tilemap.SetTile(new Vector3Int(x,y),tile);
                 }
             }

@@ -157,7 +157,7 @@ MonoBehaviour:
   roomsMin: 5
   roomsMax: 10
   genRooms:
-  - {fileID: 4572161266631745906, guid: 3ad0d123c813e514f99a4bb6d13426f7, type: 3}
+  - {fileID: 385761473093415739, guid: c465cd75acce77a43a9246b6c6108308, type: 3}
   failures: 0
   maxFailures: 100
 --- !u!4 &874070395

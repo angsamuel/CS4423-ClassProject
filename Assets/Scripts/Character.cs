@@ -19,11 +19,14 @@ public class Character : MonoBehaviour
     public MyBox myBox;
 
     [Header("Text Elements")]
-    int points = 0;
+    public int points = 0;
 
 
     [Header("Events")]
     public UnityEvent<int> pointEvent;
+
+    [Header("Scriptable Objects")]
+    public CharacterSO meepisSO;
 
 
 
@@ -31,7 +34,11 @@ public class Character : MonoBehaviour
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
-        
+
+        //saving with a scripable object
+        //points = meepisSO.points;
+
+
         //myBox = GameObject.Find("Box").GetComponent<MyBox>(); //find the box by name, pretty slow!
         //myBox = GameObject.FindObjectOfType<MyBox>(); //find the box by type,  VERY SLOW
         //myBox = GameObject.FindGameObjectWithTag("Box").GetComponent<MyBox>(); //find the box with tag, only do this if you have one box, or don't care about the one you get
@@ -73,7 +80,6 @@ public class Character : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-        Debug.Log("We collided with the box!");
 
         if(other.tag == "Box"){
             myBox = other.GetComponent<MyBox>();
@@ -97,6 +103,7 @@ public class Character : MonoBehaviour
     void HandleFood(Collider2D other){
         //update the point text element
         points+=1;
+        meepisSO.points = points;
         other.GetComponent<FoodPellet>().Eat(this.gameObject);
         pointEvent.Invoke(points);
     }

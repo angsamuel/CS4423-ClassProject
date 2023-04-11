@@ -32,6 +32,16 @@ public class RandomWalkGenerator : MonoBehaviour
 
     void RandomizeColors(){
         //optional: randomize the colors by changing the background, and colors of your base room
+        float hue = Random.Range(0f,1f);
+        
+        background.color = Color.HSVToRGB(hue,.5f,.1f);
+        randomWalkRoomBase.GetComponent<RandomWalkRoom>().floor.color = Color.HSVToRGB(hue,.5f,.2f);
+        
+        Color wallColor = Color.HSVToRGB(hue,.5f,1f);
+        
+        foreach(SpriteRenderer sr in randomWalkRoomBase.GetComponent<RandomWalkRoom>().walls){
+            sr.color = wallColor;
+        }
 
     }
 
@@ -46,22 +56,25 @@ public class RandomWalkGenerator : MonoBehaviour
                 
 
                 //step 1: choose a direction to move
-
+                Vector2Int newDirection = directions[Random.Range(0,directions.Count)];
                 
                 //step 2: open door to previous room using the OpenDoor method
-                
+                OpenDoor(GetRoom(walkPos),newDirection);
+
+                yield return null;
 
                 //step 3: move (change the value of walkPos)
-
+                walkPos += newDirection;
 
                 //step 4: place new room using PlaceRoom method
+                PlaceRoom();
 
-                
+                yield return null;    
                 //step 5: open the door of our new room to the previous room using OpenDoor method
-
+                OpenDoor(GetRoom(walkPos),-newDirection); 
 
                 //wait
-                yield return new WaitForSeconds(.1f);
+                yield return null;
             }
             yield return null;
 

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1160036058}
   m_Layer: 0
   m_Name: Character
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -150,4 +150,7 @@ MonoBehaviour:
   forceMultiplier: 10
   myBoxGamePrefab: {fileID: 8170651402514905777, guid: e08b2c5882ab7f343966640ffa566b04, type: 3}
   myBox: {fileID: 0}
-  pointText: {fileID: 0}
+  points: 0
+  pointEvent:
+    m_PersistentCalls:
+      m_Calls: []

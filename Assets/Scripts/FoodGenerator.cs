@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FoodGenerator : MonoBehaviour
 {
-    public GameObject foodPelletPrefab;
+    public List<GameObject> foodPelletPrefabs;
     public GameObject shrinkPelletPrefab;
 
 
@@ -32,7 +32,7 @@ public class FoodGenerator : MonoBehaviour
             while(true){ //goes forever
                 Vector2 randomPosition = new Vector2(Random.Range(-5f,5f),Random.Range(-5f,5f)); //random position
                 yield return new WaitForSeconds(2f);
-                GameObject newPellet = Instantiate(foodPelletPrefab,randomPosition,Quaternion.identity);
+                GameObject newPellet = Instantiate(foodPelletPrefabs[Random.Range(0,foodPelletPrefabs.Count)],randomPosition,Quaternion.identity);
                 Destroy(newPellet,60);
             }
 
